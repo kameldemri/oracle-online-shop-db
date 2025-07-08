@@ -1,3 +1,7 @@
+---
+-- LOOKUP TABLES
+---
+
 --- ROLES
 CREATE TABLE roles (
     role_id     NUMBER PRIMARY KEY,

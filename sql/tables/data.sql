@@ -1,3 +1,7 @@
+---
+-- DATA TABLES
+---
+
 -- USERS
 CREATE TABLE users (
     user_id    NUMBER PRIMARY KEY,
