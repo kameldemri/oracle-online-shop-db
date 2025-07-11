@@ -10,20 +10,15 @@ BEGIN
     :NEW.user_id := seq_user_id.NEXTVAL;
 END;
 
-CREATE OR REPLACE TRIGGER trg_soft_delete_users
+CREATE OR REPLACE TRIGGER trg_soft_delete_user
 BEFORE DELETE ON users
 FOR EACH ROW
 DECLARE
-    -- Custom exception
-    e_soft_delete EXCEPTION;
-    PRAGMA EXCEPTION_INIT(e_soft_delete, -20003);
-BEGIN
+    -- Perform soft delete instead
     UPDATE users SET deleted = 'Y',
         updated_on = SYSDATE
+    -- other cols should be handled using the backend programming lang
     WHERE user_id = :OLD.user_id;
-    
-    -- Raise the exception to cancel the deletion
-    RAISE_APPLICATION_ERROR(-20003, 'Soft deletion performed instead.');
 END;
 
 -- CUSTOMERS
@@ -41,6 +36,17 @@ BEGIN
         INSERT INTO customers (customer_id)
         VALUES (:NEW.customer_id);
     END IF;
+END;
+
+CREATE OR REPLACE TRIGGER trg_soft_delete_customer
+BEFORE DELETE ON customers
+FOR EACH ROW
+DECLARE
+    -- Perform soft delete instead
+    UPDATE customers SET deleted = 'Y',
+        updated_on = SYSDATE
+    -- other cols should be handled using the backend programming lang
+    WHERE customer_id = :OLD.customer_id;
 END;
 
 -- PRODUCTS

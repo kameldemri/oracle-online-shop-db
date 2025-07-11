@@ -11,8 +11,7 @@ CREATE TABLE users (
     last_name  VARCHAR2(100) NOT NULL,
     first_name VARCHAR2(100) NOT NULL,
     role       NUMBER NOT NULL,
-
-    deleted    CHAR(1) DEFAULT 'N' CHECK (deleted IN ('Y', 'N'));
+    deleted    CHAR(1) DEFAULT 'N' CHECK (deleted IN ('Y', 'N')),
 
     -- audit columns
     created_on DATE DEFAULT SYSDATE,
@@ -26,6 +25,7 @@ CREATE TABLE users (
 -- CUSTOMERS
 CREATE TABLE customers (
     customer_id NUMBER PRIMARY KEY REFERENCES users(user_id),
+    deleted     CHAR(1) DEFAULT 'N' CHECK (deleted IN ('Y', 'N')),
 
     -- audit columns
     created_on  DATE DEFAULT SYSDATE,
@@ -41,6 +41,7 @@ CREATE TABLE products (
     name        VARCHAR2(100) NOT NULL,
     price       NUMBER CHECK (price > 0),
     category_id NUMBER REFERENCES product_categories(category_id),
+    deleted     CHAR(1) DEFAULT 'N' CHECK (deleted IN ('Y', 'N')),
 
     -- audit columns
     created_on DATE DEFAULT SYSDATE,
@@ -60,6 +61,7 @@ CREATE TABLE shipments (
     max_orders     NUMBER DEFAULT 10,
     current_orders NUMBER DEFAULT 0 CHECK (current_orders >= 0),
     status         NUMBER,
+    deleted        CHAR(1) DEFAULT 'N' CHECK (deleted IN ('Y', 'N')),
 
     -- audit columns
     created_on DATE DEFAULT SYSDATE,
@@ -154,7 +156,7 @@ CREATE TABLE orders (
     shipment_id  NUMBER,
     address_id   NUMBER,
     status       VARCHAR2(20) DEFAULT 'pending' NOT NULL,
-    total_price NUMBER DEFAULT 0,
+    total_price  NUMBER DEFAULT 0,
 
     -- audit columns
     created_on DATE DEFAULT SYSDATE,
