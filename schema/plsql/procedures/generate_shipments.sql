@@ -24,3 +24,4 @@ BEGIN
     FORALL i IN 1 .. l_shipments.COUNT
         INSERT INTO shipments VALUES l_shipments(i);
 END;
+/
