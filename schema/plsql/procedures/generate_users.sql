@@ -1,3 +1,4 @@
+
 -- USERS
 CREATE OR REPLACE PROCEDURE generate_users (
     count_in        IN PLS_INTEGER,
@@ -26,10 +27,8 @@ BEGIN
         l_users(i).username   := 'user' || l_user_num;
         l_users(i).email      := 'user' || l_user_num || '@mail.com';
 
-        -- MD5 Hash
-        l_users(i).password   := RAWTOHEX (
-            DBMS_CRYPTO.HASH(UTL_I18N.STRING_TO_RAW('pass' || l_user_num, 'AL32UTF8'), DBMS_CRYPTO.HASH_MD5)
-        );
+        -- NOTE: Password comes already hashed from backend
+        l_users(i).password   := 'hashed_pass_' || l_user_num;
 
         l_users(i).last_name  := 'Last' || l_user_num;
         l_users(i).first_name := 'First' || l_user_num;
@@ -51,3 +50,4 @@ BEGIN
             created_by_in
         );
 END;
+/
