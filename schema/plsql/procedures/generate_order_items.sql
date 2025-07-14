@@ -1,0 +1,22 @@
+CREATE OR REPLACE PROCEDURE generate_order_items (
+    order_id_in     IN orders.order_id%TYPE,
+    total_items_in  IN PLS_INTEGER,
+    customer_id_in  IN customers.customer_id%TYPE
+) IS
+    TYPE order_items_nt IS TABLE OF order_items%ROWTYPE;
+    l_order_items order_items_nt := order_items_nt();
+BEGIN
+    FOR i IN 1 .. total_items_in LOOP
+        l_order_items.EXTEND;
+        l_order_items(i).order_id   := order_id_in;
+        l_order_items(i).item_no    := i;
+        l_order_items(i).product_id := 1;
+        l_order_items(i).quantity   := 1;
+        l_order_items(i).created_on := SYSDATE;
+        l_order_items(i).created_by := customer_id_in;
+    END LOOP;
+    -- Perform bulk insert
+    FORALL i IN 1 .. l_order_items.COUNT
+        INSERT INTO order_items VALUES l_order_items(i);
+END;
+/
