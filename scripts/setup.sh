@@ -29,6 +29,14 @@ sqlplus -s "$DEV_CONN" <<EOF
 @../schema/plsql/procedures/generate_users.sql
 @../schema/plsql/procedures/generate_products.sql
 @../schema/plsql/procedures/generate_shipments.sql
+@../schema/plsql/procedures/generate_order_items.sql
+@../schema/plsql/procedures/generate_orders.sql
+@../schema/plsql/procedures/generate_cities.sql
+@../schema/plsql/procedures/generate_addresses.sql
+@../schema/ddl/views/views.sql
+@../schema/ddl/public_synonyms/public_synonyms.sql
+@../schema/ddl/indexes/indexes.sql
+@../schema/plsql/procedures/seed.sql
 EXIT;
 EOF
 
