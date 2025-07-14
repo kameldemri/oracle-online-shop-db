@@ -9,7 +9,6 @@ BEGIN
     FOR i IN 1 .. count_in LOOP
         -- Extend the nested table
         l_shipments.EXTEND;
-
         -- Fill values
         l_shipments(i).shipping_date   := SYSDATE + TRUNC(DBMS_RANDOM.VALUE(0, 15));
         l_shipments(i).carrier         := 'Carrier ' || TRUNC(DBMS_RANDOM.VALUE(1, 5));
@@ -18,8 +17,8 @@ BEGIN
         l_shipments(i).status          := 1;
         l_shipments(i).created_on      := SYSDATE;
         l_shipments(i).created_by      := created_by_in;
+        l_shipments(i).deleted         := 'N';
     END LOOP;
-
     -- Insert all rows at once
     FORALL i IN 1 .. l_shipments.COUNT
         INSERT INTO shipments VALUES l_shipments(i);
