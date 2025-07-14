@@ -82,3 +82,21 @@ BEGIN
     :NEW.shipment_id := seq_shipment_id.NEXTVAL;
 END;
 /
+
+-- CITIES
+CREATE OR REPLACE TRIGGER trg_city_id
+BEFORE INSERT ON cities
+FOR EACH ROW
+BEGIN
+    :NEW.city_id := seq_city_id.NEXTVAL;
+END;
+/
+
+-- ADDRESSES
+CREATE OR REPLACE TRIGGER trg_address_id
+BEFORE INSERT ON addresses
+FOR EACH ROW
+BEGIN
+    :NEW.address_id := seq_address_id.NEXTVAL;
+END;
+/
