@@ -29,3 +29,11 @@ CREATE TABLE order_statuses (
     code        VARCHAR2(20) UNIQUE NOT NULL,
     label       VARCHAR2(256) UNIQUE NOT NULL
 );
+
+-- SHIPMENT_TYPES
+CREATE TABLE shipment_types (
+    shipment_type_id  NUMBER PRIMARY KEY,
+    name              VARCHAR2(100),
+    max_weight        NUMBER(6,2),
+    max_volume        NUMBER(7,5)
+);
