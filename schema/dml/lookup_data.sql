@@ -25,4 +25,9 @@ INSERT INTO order_statuses (status_id, code, label) VALUES (1, 'pending', 'Pendi
 INSERT INTO order_statuses (status_id, code, label) VALUES (2, 'shipped', 'Shipped');
 INSERT INTO order_statuses (status_id, code, label) VALUES (3, 'cancelled', 'Cancelled');
 
+-- SHIPMENT_TYPES
+INSERT INTO shipment_types VALUES (1, 'Small Van', 100, 1.0);
+INSERT INTO shipment_types VALUES (2,'Medium Truck', 500, 5.0);
+INSERT INTO shipment_types VALUES (3, 'Large Truck', 2000, 20.0);
+
 COMMIT;
