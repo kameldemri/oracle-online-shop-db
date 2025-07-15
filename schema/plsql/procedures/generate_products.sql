@@ -23,7 +23,7 @@ BEGIN
         l_products(i).name := 'product' || l_product_num;
         l_products(i).price := TRUNC(DBMS_RANDOM.VALUE(100, 1200));
         l_products(i).category_id := TRUNC(DBMS_RANDOM.VALUE(1, 3));
-        l_products(i).weight := TRUNC(DBMS_RANDOM.VALUE(0.1, 10), 2);
+        l_products(i).weight := TRUNC(DBMS_RANDOM.VALUE(0.10, 10), 2);
         l_products(i).volume := TRUNC(DBMS_RANDOM.VALUE(0.001, 0.3), 4);
     END LOOP;
     -- Bulk insert
