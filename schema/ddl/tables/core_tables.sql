@@ -37,7 +37,7 @@ CREATE TABLE products (
     price       NUMBER(10,2) CHECK (price > 0),
     category_id NUMBER REFERENCES product_categories(category_id),
     weight      NUMBER(6,2) CHECK (weight > 0),
-    volume      NUMBER(6,2) CHECK (volume > 0),
+    volume      NUMBER(6,4) CHECK (volume > 0),
     deleted     CHAR(1) DEFAULT 'N' CHECK (deleted IN ('Y', 'N')),
     created_on  DATE DEFAULT SYSDATE,
     updated_on  DATE,
@@ -97,7 +97,7 @@ CREATE TABLE cities (
     name      VARCHAR2(100) NOT NULL,
     wilaya_id NUMBER NOT NULL,
     CONSTRAINT fk_wilaya FOREIGN KEY (wilaya_id)
-        REFERENCES wilayas(wilaya_id)
+        REFERENCES wilayas(wilaya_id) ON DELETE CASCADE
 );
 
 -- ADDRESSES
@@ -110,7 +110,7 @@ CREATE TABLE addresses (
     CONSTRAINT fk_user FOREIGN KEY (user_id)
         REFERENCES users(user_id),
     CONSTRAINT fk_city FOREIGN KEY (city_id)
-        REFERENCES cities(city_id)
+        REFERENCES cities(city_id) ON DELETE CASCADE
 );
 
 -- ORDERS
@@ -126,8 +126,8 @@ CREATE TABLE orders (
     created_by NUMBER,
     updated_by NUMBER,
     CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
-    CONSTRAINT fk_shipment FOREIGN KEY (shipment_id) REFERENCES shipments(shipment_id),
-    CONSTRAINT fk_address FOREIGN KEY (address_id) REFERENCES addresses(address_id),
+    CONSTRAINT fk_shipment FOREIGN KEY (shipment_id) REFERENCES shipments(shipment_id) ON DELETE SET NULL,
+    CONSTRAINT fk_address FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON DELETE SET NULL,
     CONSTRAINT fk_order_created_by FOREIGN KEY (created_by) REFERENCES users(user_id),
     CONSTRAINT fk_order_updated_by FOREIGN KEY (updated_by) REFERENCES users(user_id)
 );
