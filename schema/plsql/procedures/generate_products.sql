@@ -39,5 +39,9 @@ BEGIN
             l_products(i).weight,
             l_products(i).volume
         );
+EXCEPTION
+    WHEN OTHERS THEN
+            record_error();
+            RAISE;
 END;
 /

@@ -30,5 +30,10 @@ BEGIN
     -- Perform bulk insert
     FORALL i IN 1 .. l_order_items.COUNT
         INSERT INTO order_items VALUES l_order_items(i);
+
+EXCEPTION
+    WHEN OTHERS THEN
+            record_error();
+            RAISE;
 END;
 /

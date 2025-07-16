@@ -49,5 +49,9 @@ BEGIN
             SYSDATE,
             created_by_in
         );
+EXCEPTION
+    WHEN OTHERS THEN
+            record_error();
+            RAISE;
 END;
 /

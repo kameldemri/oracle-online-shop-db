@@ -22,5 +22,10 @@ BEGIN
     -- Insert all rows at once
     FORALL i IN 1 .. l_shipments.COUNT
         INSERT INTO shipments VALUES l_shipments(i);
+
+EXCEPTION
+    WHEN OTHERS THEN
+            record_error();
+            RAISE;
 END;
 /
