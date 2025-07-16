@@ -26,6 +26,7 @@ sqlplus -s "$DEV_CONN" <<EOF
 @../schema/ddl/sequences/sequences.sql
 @../schema/ddl/views/views.sql
 @../schema/plsql/triggers/triggers.sql
+@../schema/plsql/triggers/idk.sql
 @../schema/plsql/procedures/generate_users.sql
 @../schema/plsql/procedures/generate_products.sql
 @../schema/plsql/procedures/generate_shipments.sql
