@@ -53,18 +53,6 @@ FROM orders
 GROUP BY TRUNC(created_on)
 ORDER BY order_date DESC;
 
--- Deleted Products View
-CREATE OR REPLACE VIEW vw_deleted_products AS
-SELECT
-    product_id,
-    name,
-    price,
-    category_id,
-    deleted,
-    updated_on
-FROM products
-WHERE deleted = 'Y';
-
 -- Full Address Details
 CREATE OR REPLACE VIEW vw_user_addresses AS
 SELECT
