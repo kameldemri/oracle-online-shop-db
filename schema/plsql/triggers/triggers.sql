@@ -15,13 +15,17 @@ END;
 CREATE OR REPLACE TRIGGER trg_soft_delete_user
 BEFORE DELETE ON users
 FOR EACH ROW
+DECLARE
+   PRAGMA AUTONOMOUS_TRANSACTION;
 BEGIN
-    UPDATE users
-    SET deleted = 'Y',
-        updated_on = SYSDATE
-    WHERE user_id = :OLD.user_id;
+   UPDATE users
+   SET deleted     = 'Y',
+       updated_on  = SYSDATE
+   WHERE user_id = :OLD.user_id;
 
-    RAISE_APPLICATION_ERROR(-20001, 'Soft delete performed; original delete aborted.');
+   COMMIT;
+
+   RAISE_APPLICATION_ERROR(-20001, 'Soft delete performed. Physical delete aborted.');
 END;
 /
 
@@ -46,13 +50,17 @@ END;
 CREATE OR REPLACE TRIGGER trg_soft_delete_customer
 BEFORE DELETE ON customers
 FOR EACH ROW
+DECLARE
+   PRAGMA AUTONOMOUS_TRANSACTION;
 BEGIN
-    UPDATE customers
-    SET deleted = 'Y',
-        updated_on = SYSDATE
-    WHERE customer_id = :OLD.customer_id;
+   UPDATE customers
+   SET deleted     = 'Y',
+       updated_on  = SYSDATE
+   WHERE customer_id = :OLD.customer_id;
 
-    RAISE_APPLICATION_ERROR(-20002, 'Soft delete performed; original delete aborted.');
+   COMMIT;
+
+   RAISE_APPLICATION_ERROR(-20002, 'Soft delete performed. Physical delete aborted.');
 END;
 /
 
