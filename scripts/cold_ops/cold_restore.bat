@@ -2,8 +2,8 @@
 REM === CONFIGURATION ===
 set ORACLE_SID=XE
 set SYS_CONN=/ as sysdba
-set BASE_COLD_BACKUP_DIR=C:\oracle_backups\cold
-set ORACLE_BASE=C:\app\kamel\product\21c
+set BASE_COLD_BACKUP_DIR=Z:\cold
+set ORACLE_BASE=C:\app\Administrator\product\21c
 set DATA_DIR=%ORACLE_BASE%\oradata\%ORACLE_SID%
 set CONFIG_DIR=%ORACLE_BASE%\database
 
